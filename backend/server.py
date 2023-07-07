@@ -21,8 +21,9 @@ def hello_flask():
 # todo 添加路由，把controller的命名空间加到启动类中，否则swagger无法展示API接口
 def add_router():
     from controller.user_controller import user_ns
+    from controller.login_controller import login_ns
     api.add_namespace(user_ns,"/user") # 添加api的命名空间，解决swagger不展示内容的问题
-
+    api.add_namespace(login_ns, "/login")
 
 
 if __name__ == "__main__":
