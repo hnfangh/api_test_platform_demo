@@ -4,7 +4,7 @@ class Log:
 
 
     # 配置日志输出到文件
-    logger.add("/backend/logs/run.log", rotation="10 MB", retention="10 days", level="INFO")
+    logger.add("./logs/run.log", rotation="10 MB", retention="10 days", level="INFO")
 
     # 写入日志
     def info(self,msg):
