@@ -1,9 +1,10 @@
 
 class Config(object):
-    user = "xxx"
-    pw = "xxx"
-    server = "localhost"
-    database = "platform"
+    """aliyun for mysql"""
+    user = "test"
+    pw = "123456"
+    server = "47.106.133.253"
+    database = "testplatform"
 
     SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{user}:{pw}@{server}/{database}" # 配置数据库URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False # 关闭异常警告提醒
