@@ -30,8 +30,8 @@ class LoginController(Resource):
         res = loginservice.login(userdao.id).as_user_entity_dict()
         # 把从前端拿到到参数与DB中查询数据比对，相同时候登陆成功
         if res == user_data:
-            return jsonify({"code":0, "msg":"user login success", "data":res})
+            return jsonify({"code":0, "msg":"user login success", "data":user_data})
         else: #否则登陆失败
-            return jsonify({"code":40001, "msg":"user login fail, user or password error", "data":res})
+            return jsonify({"code":40001, "msg":"user login fail, user or password error", "data":user_data})
 
 

@@ -6,6 +6,10 @@ from util.log_util import Log
 userdao = UserDAO()
 log = Log()
 
+
+"""
+登陆服务层逻辑
+"""
 class LoginService():
 
 
@@ -26,15 +30,3 @@ class LoginService():
 
 
 
-    def register(self,userdao):
-        """
-        注册逻辑
-        :param userdao:
-        :return:
-        """
-        res = userdao.get_user(userdao.id)
-        if res:
-            log.info("用户已存在，无法注册®️")
-            return False
-        else:
-            return userdao.add_user(userdao)
