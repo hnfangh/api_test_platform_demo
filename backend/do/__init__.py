@@ -1,4 +1,6 @@
 from do.user_entity import UserEntity   # 倒入要执行的实体类包
+from do.testcase_entity import TestcaseEntity
+from server import db
 
 """
     数据库表创建,运行文件创建
