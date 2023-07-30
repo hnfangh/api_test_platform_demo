@@ -30,7 +30,7 @@ class TestcaseDAO(TestcaseEntity):
     def add_testcase(self,TestcaseEntity):
         """新增测试用例"""
         db.session.add(TestcaseEntity)
-        db.commit()
+        db.session.commit()
         self.log.info(f"新增的测试用例为：{TestcaseEntity}")
         return TestcaseEntity.id
 

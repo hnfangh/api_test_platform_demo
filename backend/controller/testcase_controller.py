@@ -12,6 +12,8 @@ testcase_service = TestcaseService()
 
 testcase_ns = Namespace("testcase", description="测试用例管理")
 
+
+@testcase_ns.route("")
 class TestcaseController(Resource):
 
 
@@ -19,14 +21,28 @@ class TestcaseController(Resource):
     get_parser = api.parser()
     get_parser.add_argument("id", type=int, location="args")
 
+    @testcase_ns.doc(description='用例查询接口')
     @testcase_ns.expect(get_parser)
     def get(self):
+        """
+        查询单个/多个
+        :return:
+        """
         case_id = request.args.get("id")
         log.info(f"接受的前端参数为：<========={case_id}")
+        # 传参数，查询单个
         if case_id:
-            datas = testcase_service.get_filter_testcase(case_id).as_testcase_entity_dict()
-            return jsonify({"code":0, "msg":"search testcase success","data":datas})
+            res = testcase_service.get_filter_testcase(case_id)
+            # 查询存在的ID用例
+            if res:
+                datas = [testcase_service.get_filter_testcase(case_id).as_testcase_entity_dict()]
+                log.info(f"debug=>>>>>>>>>>>>{datas}")
+                return jsonify({"code":0, "msg":"search testcase success","data":datas})
+            # 查询不存在的ID用例
+            else:
+                return jsonify({"code": 0, "msg": "search testcase success", "data": res})
         else:
+            # 不传参数查询所有
             datas = testcase_service.get_all_testcase()
             all_datas = [data.as_testcase_entity_dict() for data in datas]
             return jsonify({"code":0, "msg":"search all testcase success","data":all_datas})
@@ -40,6 +56,7 @@ class TestcaseController(Resource):
     put_parser.add_argument("step", type=str, required=True, location="json")
     put_parser.add_argument("expect", type=str, required=True, location="json")
 
+    @testcase_ns.doc(description='用例修改接口')
     @testcase_ns.expect(put_parser)
     def put(self):
         testcase_data = request.json
@@ -60,7 +77,7 @@ class TestcaseController(Resource):
     post_parser.add_argument("step", type=str, required=True, location="json")
     post_parser.add_argument("expect", type=str, required=True, location="json")
 
-
+    @testcase_ns.doc(description='用例新增接口')
     @testcase_ns.expect(post_parser)
     def post(self):
         testcase_data = request.json
@@ -73,12 +90,14 @@ class TestcaseController(Resource):
             return jsonify({"code":40001, "msg":"create testcase fail", "data":res})
 
 
+
     delete_parser = api.parser()
     delete_parser.add_argument("id", type=int, required=True, location="json")
 
+    @testcase_ns.doc(description='用例删除接口')
     @testcase_ns.expect(delete_parser)
     def delete(self):
-        case_id = request.args.get("id")
+        case_id = request.json.get("id")
         log.info(f"接收删除测试用例的参数<========{case_id}")
         if case_id:
             testcase_service.delete_testcase(case_id)

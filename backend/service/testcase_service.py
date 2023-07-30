@@ -1,7 +1,7 @@
 from dao.testcase_dao import TestcaseDAO
 from util.log_util import Log
 
-class TestcaseService():
+class TestcaseService:
 
     def __init__(self):
         self.testcase_dao = TestcaseDAO()
