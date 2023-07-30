@@ -5,7 +5,7 @@ from util.log_util import Log
 """
 User的服务层，处理业务逻辑
 """
-class UserService:
+class UserService():
 
     def __init__(self):
 

@@ -16,6 +16,6 @@ class TestcaseEntity(db.Model):
     # 预期结果
     expect = db.Column(db.String(64), nullable=True)
 
-
+    # 返回结果为字段类型
     def as_testcase_entity_dict(self):
         return {"id": self.id, "title": self.title, "level": self.level, "step": self.step, "expect": self.expect}

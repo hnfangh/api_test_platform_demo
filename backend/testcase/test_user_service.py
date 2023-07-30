@@ -1,3 +1,4 @@
+from service.register_service import RegisterService
 from service.user_service import UserService
 from dao.user_dao import UserDAO
 
@@ -6,10 +7,11 @@ class TestUserService:
 
     def setup(self):
         self.user_service = UserService()
+        self.user_register = RegisterService()
 
     def test_register(self):
         userdao = UserDAO(id=2, username="wangda", password=534675675345)
-        self.user_service.register(userdao)
+        self.user_register.register(userdao)
 
     def test_update_user(self):
         userdao = UserDAO(id=1, username="zhangsan", password=1234)
