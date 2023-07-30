@@ -35,7 +35,7 @@ class UserController(Resource):
             # 查询单个用户信息
             # datas查询结果为一个UserDAO对象，进行json格式
             # 调用DO层中的as_user_entity_dict(),把python对象转换成前端可以使用的json
-            datas = userservice.get_filter_user(user_id).as_user_entity_dict() # 调用Service层
+            datas = [userservice.get_filter_user(user_id).as_user_entity_dict()] # 调用Service层
             return jsonify({"code":0, "msg":"search success","data":datas})
         else:
             # 否则查询所有用户信息
