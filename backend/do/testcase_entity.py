@@ -10,7 +10,7 @@ class TestcaseEntity(db.Model):
     # 用例标题，唯一
     title = db.Column(db.String(64), nullable=True, unique=True)
     # 用例等级，不为空
-    level = db.Column(db.Integer, nullable=True)
+    level = db.Column(db.String(16), nullable=True)
     # 用例步骤，可以重复
     step = db.Column(db.String(128), nullable=True)
     # 预期结果
