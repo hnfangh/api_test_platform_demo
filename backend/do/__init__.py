@@ -1,5 +1,7 @@
 from do.user_entity import UserEntity   # 倒入要执行的实体类包
 from do.testcase_entity import TestcaseEntity
+from do.plan_entity import PlanEntity
+from do.build_entity import BuildEntity
 from server import db
 
 """
