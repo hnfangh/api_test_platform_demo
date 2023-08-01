@@ -23,6 +23,10 @@ class LoginController(Resource):
 
     @login_ns.expect(post_parser)
     def post(self):
+        """
+        登陆用户
+        :return:
+        """
         user_data = request.json
         log.info(f"接收登陆的用户参数<======={user_data}")
         userdao = UserDAO(**user_data)

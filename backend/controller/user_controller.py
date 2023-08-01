@@ -28,6 +28,10 @@ class UserController(Resource):
     # 查询接口
     @user_ns.expect(get_parser) # 添加命名空间预期的参数
     def get(self):
+        """
+        查询用户-单个/多个
+        :return:
+        """
         # 拿请求参数用户ID
         user_id = request.args.get("id")
         log.info(f"接收前端传参 <========{user_id}")
@@ -54,6 +58,10 @@ class UserController(Resource):
     # 更新接口
     @user_ns.expect(put_parser) # 添加命名空间预期的参数
     def put(self):
+        """
+        更新用户
+        :return:
+        """
         user_data = request.json
         log.info(f"接收更新用户的参数<========{user_data}")
         userdao = UserDAO(**user_data)  # 接受的参数返回值进行解包
@@ -74,6 +82,10 @@ class UserController(Resource):
     # 新增接口
     @user_ns.expect(post_parser)    # 添加命名空间预期的参数
     def post(self):
+        """
+        新增用户
+        :return:
+        """
         user_data = request.json
         log.info(f"接收更新用户的参数<======={user_data}")
         userdao = UserDAO(**user_data)  # 接受的参数返回值进行解包
@@ -91,6 +103,10 @@ class UserController(Resource):
     # 删除接口
     @user_ns.expect(del_parser) # 添加命名空间预期的参数
     def delete(self):
+        """
+        删除用户
+        :return:
+        """
         user_data = request.json
         res = user_data.get("id")
         log.info(f"接收更新用户的参数<======={res}")

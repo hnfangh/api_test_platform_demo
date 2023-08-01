@@ -21,11 +21,10 @@ class TestcaseController(Resource):
     get_parser = api.parser()
     get_parser.add_argument("id", type=int, location="args")
 
-    @testcase_ns.doc(description='用例查询接口')
     @testcase_ns.expect(get_parser)
     def get(self):
         """
-        查询单个/多个
+        查询用例单个/多个
         :return:
         """
         case_id = request.args.get("id")
@@ -56,9 +55,12 @@ class TestcaseController(Resource):
     put_parser.add_argument("step", type=str, required=True, location="json")
     put_parser.add_argument("expect", type=str, required=True, location="json")
 
-    @testcase_ns.doc(description='用例修改接口')
     @testcase_ns.expect(put_parser)
     def put(self):
+        """
+        更新用例
+        :return:
+        """
         testcase_data = request.json
         log.info(f"接收更新测试用例的参数<========{testcase_data}")
         testcase_dao = TestcaseDAO(**testcase_data)
@@ -77,9 +79,13 @@ class TestcaseController(Resource):
     post_parser.add_argument("step", type=str, required=True, location="json")
     post_parser.add_argument("expect", type=str, required=True, location="json")
 
-    @testcase_ns.doc(description='用例新增接口')
     @testcase_ns.expect(post_parser)
     def post(self):
+        """
+        新增用例
+        :return:
+        """
+
         testcase_data = request.json
         log.info(f"接收新增测试用例的参数<========{testcase_data}")
         testcase_dao = TestcaseDAO(**testcase_data)
@@ -94,9 +100,12 @@ class TestcaseController(Resource):
     delete_parser = api.parser()
     delete_parser.add_argument("id", type=int, required=True, location="json")
 
-    @testcase_ns.doc(description='用例删除接口')
     @testcase_ns.expect(delete_parser)
     def delete(self):
+        """
+        删除用例
+        :return:
+        """
         case_id = request.json.get("id")
         log.info(f"接收删除测试用例的参数<========{case_id}")
         if case_id:
